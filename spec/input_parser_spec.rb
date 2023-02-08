@@ -8,7 +8,6 @@ describe InputParser do
   describe ".new" do
     it { expect(subject.current_path).to eq('') }
     it { expect(subject.file_structure).to eq({}) }
-    it { expect(subject.data_path).to eq test_file }
   end
 
   describe "#run" do

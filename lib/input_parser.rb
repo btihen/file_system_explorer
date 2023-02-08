@@ -1,19 +1,30 @@
-class InputParser
-  attr_reader :data_path, :file_structure, :current_path, :last_command
-  # private     :file_path
+require_relative './commands.rb'
+require_relative './returned_data.rb'
 
-  def initialize(data_path)
-    @file_structure = {}
-    @data_path = data_path
-    @current_path = ''
+class InputParser
+  attr_reader :input_data_file, :state
+  private :input_data_file
+
+  def initialize(input_data_file)
+    @state = { current_path: '', file_structure: {} }
+    @input_data_file = input_data_file
   end
 
-  def self.call(data_path)
-    new(data_path).run
+  def self.call(input_data_file)
+    new(input_data_file).run
   end
 
   def run
     read_file
+    state
+  end
+
+  def file_structure
+    state[:file_structure]
+  end
+
+  def current_path
+    state[:current_path]
   end
 
   private
@@ -22,44 +33,27 @@ class InputParser
   # file_data = File.read(data_path).split
   def read_file
     # process one line at a time
-    File.foreach(data_path) { |line| parse(line) }
+    File.foreach(input_data_file) { |line| parse(line) }
   end
 
   def parse(line)
     if line.start_with?('$')
-      prompt, command, args = line.split
-
-      case command
-      when 'cd'
-        case args
-        when '/'
-          @current_path = '/'
-          file_structure['/'] = {}
-        when '..'
-          path_elements = @current_path.split('/').reject { |p| p == '' }
-          @current_path = '/' + path_elements.take(path_elements.size - 1).join('/')
-        else
-          nodes_path = ['/'] + @current_path.split('/').reject { |p| p == '' }
-          current_node = file_structure.dig(*nodes_path)
-          current_node[args] = {}
-          @current_path = '/' + (@current_path.split('/').reject { |p| p == '' } + [args]).join('/')
-        end
-      when 'ls'
-      end
-
-    # when returned data
+      process_command(line)
     else
-      context_info, name = line.split
-      nodes_path = ['/'] + @current_path.split('/').reject { |p| p == '' }
-      current_node = file_structure.dig(*nodes_path)
-
-      case context_info
-      when NilClass
-      when 'dir'
-        current_node[name] = {}
-      else
-        current_node[name] = context_info.to_i
-      end
+      process_returned_data(line)
     end
+  end
+
+  def process_command(line)
+    prompt, command, args = line.split
+    klass = Object.const_get("Command#{command.capitalize}")
+
+    @state = klass.new(state).update(args)
+  end
+
+  def process_returned_data(line)
+    context_data, name = line.split
+
+    @state = ReturnedData.new(state).update(context_data, name)
   end
 end
