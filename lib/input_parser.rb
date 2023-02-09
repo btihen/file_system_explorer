@@ -1,28 +1,28 @@
-require_relative './commands.rb'
-require_relative './returned_data.rb'
+# frozen_string_literal: true
 
+require_relative './commands'
+require_relative './returned_data'
+
+# class loads and processes the input data and returns the file structure
 class InputParser
   attr_reader :input_data_file, :state
   private :input_data_file
 
   def initialize(input_data_file)
-    @state = { current_path: '', file_structure: {} }
+    @state = { current_path: '', file_structure: { '/' => {} } }
     @input_data_file = input_data_file
-  end
-
-  def self.call(input_data_file)
-    new(input_data_file).run
   end
 
   def run
     read_file
-    state
+    state[:file_structure]
   end
 
   def file_structure
     state[:file_structure]
   end
 
+  # helpful when debugging
   def current_path
     state[:current_path]
   end
@@ -45,7 +45,7 @@ class InputParser
   end
 
   def process_command(line)
-    prompt, command, args = line.split
+    _prompt, command, args = line.split
     klass = Object.const_get("Command#{command.capitalize}")
 
     @state = klass.new(state).update(args)
