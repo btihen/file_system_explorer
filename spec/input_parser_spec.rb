@@ -15,10 +15,10 @@ describe InputParser do
 
   # rubocop:disable Style/NumericLiterals
   describe '#run' do
+    before { subject.run }
+
     context 'when input cd /' do
       let(:test_file) { 'data/test_cd_root.txt' }
-
-      before { subject.run }
 
       it { expect(subject.current_path).to eq('/') }
       it { expect(subject.file_structure).to eq({ '/' => {} }) }
@@ -33,8 +33,6 @@ describe InputParser do
             'c.dat' => 8504156,
             'd' => {} } }
       end
-
-      before { subject.run }
 
       it { expect(subject.current_path).to eq('/') }
       it { expect(subject.file_structure).to eq(expected_structure) }
@@ -55,8 +53,6 @@ describe InputParser do
             'd' => {} } }
       end
 
-      before { subject.run }
-
       it { expect(subject.current_path).to eq('/a') }
       it { expect(subject.file_structure).to eq(expected_structure) }
     end
@@ -66,7 +62,9 @@ describe InputParser do
       let(:expected_structure) do
         { '/' =>
           { 'a' => {
-              'e' => { 'i' => 584 },
+              'e' => {
+                'i' => 584
+              },
               'f' => 29116,
               'g' => 2557,
               'h.lst' => 62596
@@ -75,8 +73,6 @@ describe InputParser do
             'c.dat' => 8504156,
             'd' => {} } }
       end
-
-      before { subject.run }
 
       it { expect(subject.current_path).to eq('/a/e') }
       it { expect(subject.file_structure).to eq(expected_structure) }
@@ -87,7 +83,9 @@ describe InputParser do
       let(:expected_structure) do
         { '/' =>
           { 'a' => {
-              'e' => { 'i' => 584 },
+              'e' => {
+                'i' => 584
+              },
               'f' => 29116,
               'g' => 2557,
               'h.lst' => 62596
@@ -101,8 +99,6 @@ describe InputParser do
               'k' => 7214296
             } } }
       end
-
-      before { subject.run }
 
       it { expect(subject.current_path).to eq('/') }
       it { expect(subject.file_structure).to eq(expected_structure) }

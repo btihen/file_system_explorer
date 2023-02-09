@@ -55,7 +55,7 @@ class CommandCd
   def cd_named_directory_update(args)
     nodes_path = ['/'] + current_path.split('/').reject { |p| p == '' }
     current_node = file_structure.dig(*nodes_path)
-    current_node[args] = {}
+    current_node[args] = {} unless current_node.key?(args)
     @current_path = "/#{(current_path.split('/').reject { |p| p == '' } + [args]).join('/')}"
   end
 end

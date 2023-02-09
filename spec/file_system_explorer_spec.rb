@@ -2,7 +2,8 @@
 
 require_relative '../lib/file_system_explorer'
 
-describe FileSystemExplorer do # rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength
+describe FileSystemExplorer do
   subject { described_class.new(test_file) }
 
   let(:test_file) { 'data/test_input.txt' }
@@ -18,7 +19,9 @@ describe FileSystemExplorer do # rubocop:disable Metrics/BlockLength
       let(:expected_structure) do
         { '/' =>
           { 'a' => {
-              'e' => { 'i' => 584 },
+              'e' => {
+                'i' => 584
+              },
               'f' => 29116,
               'g' => 2557,
               'h.lst' => 62596
@@ -40,3 +43,4 @@ describe FileSystemExplorer do # rubocop:disable Metrics/BlockLength
   end
   # rubocop:enable Style/NumericLiterals
 end
+# rubocop:enable Metrics/BlockLength
