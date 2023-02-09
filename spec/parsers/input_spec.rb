@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../lib/input_parser'
+require_relative '../../lib/parsers/input'
 
 # rubocop:disable Metrics/BlockLength
-describe InputParser do
+describe Parsers::Input do
   subject { described_class.new(test_file) }
 
   describe '.new' do

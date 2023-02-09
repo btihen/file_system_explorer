@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative '../lib/directory_calculator'
+require_relative '../../lib/calculators/directory'
 
 # rubocop:disable Metrics/BlockLength
 # rubocop:disable Style/NumericLiterals
-describe DirectoryCalculator do
+describe Calculators::Directory do
   subject { described_class.new(file_data) }
   let(:file_data_root) { { '/' => {} } }
   let(:file_data_all_levels) do
