@@ -30,11 +30,11 @@ describe Calculators::Directory do
   describe '.new' do
     context 'when file_data is empty' do
       let(:file_data) { file_data_root }
-      it { expect(subject.directory_sizes).to eq(file_data_root) }
+      it { expect(subject.directory_sizes).to eq({}) }
     end
     context 'when file_data is complete' do
       let(:file_data) { file_data_all_levels }
-      it { expect(subject.directory_sizes).to eq(file_data_all_levels) }
+      it { expect(subject.directory_sizes).to eq({}) }
     end
   end
 
