@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/calculators/directory'
+require_relative '../../lib/calculators/directory_paths'
 
 # rubocop:disable Metrics/BlockLength
 # rubocop:disable Style/NumericLiterals
-describe Calculators::Directory do
+describe Calculators::DirectoryPaths do
   subject { described_class.new(file_data) }
-  let(:file_data_root) { { '/' => {} } }
   let(:file_data_all_levels) do
     { '/' =>
       { 'a' => {
@@ -25,17 +24,6 @@ describe Calculators::Directory do
           'd.ext' => 5626152,
           'k' => 7214296
         } } }
-  end
-
-  describe '.new' do
-    context 'when file_data is empty' do
-      let(:file_data) { file_data_root }
-      it { expect(subject.directory_sizes).to eq({}) }
-    end
-    context 'when file_data is complete' do
-      let(:file_data) { file_data_all_levels }
-      it { expect(subject.directory_sizes).to eq({}) }
-    end
   end
 
   # intermediate step - useful for debugging
@@ -68,7 +56,7 @@ describe Calculators::Directory do
     end
 
     context 'full data set' do
-      let(:file_data) { file_data_all_levels}
+      let(:file_data) { file_data_all_levels }
       let(:expected_result) do
         ['/', '/a', '/d', '/a/e']
       end

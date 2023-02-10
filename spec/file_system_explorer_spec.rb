@@ -9,7 +9,7 @@ describe FileSystemExplorer do
   let(:test_file) { 'data/test_input.txt' }
 
   describe '.new' do
-    it { expect(subject.file_structure).to eq({ '/' => {} }) }
+    it { expect(subject.file_structure).to eq({}) }
   end
 
   # rubocop:disable Style/NumericLiterals
@@ -35,10 +35,17 @@ describe FileSystemExplorer do
               'k' => 7214296
             } } }
       end
+      let(:expected_sizes) do
+        [{ '/' => (584 + 29116 + 2557 + 62596 + 14848514 + 8504156 + 4060174 + 8033020 + 5626152 + 7214296) },
+         { '/a' => (584 + 29116 + 2557 + 62596) },
+         { '/a/e' => 584 },
+         { '/d' => (4060174 + 8033020 + 5626152 + 7214296) }]
+      end
 
       before { subject.run }
 
       it { expect(subject.file_structure).to eq(expected_structure) }
+      it { expect(subject.directory_sizes).to eq(expected_sizes) }
     end
   end
   # rubocop:enable Style/NumericLiterals

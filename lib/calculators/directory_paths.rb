@@ -2,13 +2,12 @@
 
 module Calculators
   # class that takes a file structure and calculates the sizes of each directory
-  class Directory
-    attr_reader :file_structure, :directory_sizes, :paths
+  class DirectoryPaths
+    attr_reader :file_structure, :paths
     private :file_structure
 
     def initialize(file_structure)
       @file_structure = file_structure
-      @directory_sizes = {}
     end
 
     def run
