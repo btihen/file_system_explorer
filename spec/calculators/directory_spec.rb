@@ -38,43 +38,42 @@ describe Calculators::Directory do
     end
   end
 
-  describe '#run' do
+  # intermediate step - useful for debugging
+  describe '#paths' do
     before { subject.run }
 
-    context '#paths' do
-      describe 'root' do
-        let(:file_data) { { '/' => {} } }
-        let(:expected_result) { ['/'] }
+    context 'root' do
+      let(:file_data) { { '/' => {} } }
+      let(:expected_result) { ['/'] }
 
-        it { expect(subject.paths).to match_array(expected_result) }
+      it { expect(subject.paths).to match_array(expected_result) }
+    end
+
+    context 'nested 1 level' do
+      let(:file_data) { { '/' => { 'a' => {} } } }
+      let(:expected_result) { ['/', '/a'] }
+
+      it { expect(subject.paths).to match_array(expected_result) }
+    end
+
+    context 'nested 2 level' do
+      let(:file_data) do
+        { '/' =>
+          { 'a' => { 'b' => {} },
+            'c' => { 'd' => {} } } }
+      end
+      let(:expected_result) { ['/', '/a', '/c', '/a/b', '/c/d'] }
+
+      it { expect(subject.paths).to match_array(expected_result) }
+    end
+
+    context 'full data set' do
+      let(:file_data) { file_data_all_levels}
+      let(:expected_result) do
+        ['/', '/a', '/d', '/a/e']
       end
 
-      describe 'nested 1 level' do
-        let(:file_data) { { '/' => { 'a' => {} } } }
-        let(:expected_result) { ['/', '/a'] }
-
-        it { expect(subject.paths).to match_array(expected_result) }
-      end
-
-      describe 'nested 2 level' do
-        let(:file_data) do
-          { '/' =>
-            { 'a' => { 'b' => {} },
-              'c' => { 'd' => {} } } }
-        end
-        let(:expected_result) { ['/', '/a', '/c', '/a/b', '/c/d'] }
-
-        it { expect(subject.paths).to match_array(expected_result) }
-      end
-
-      describe 'full data set' do
-        let(:file_data) { file_data_all_levels}
-        let(:expected_result) do
-          ['/', '/a', '/d', '/a/e']
-        end
-
-        it { expect(subject.paths).to match_array(expected_result) }
-      end
+      it { expect(subject.paths).to match_array(expected_result) }
     end
   end
 end
