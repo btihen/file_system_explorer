@@ -1,8 +1,12 @@
 # Answers:
 
+## Sum of small directories sizes
+
+| 1989474 | Total size of small directories |
+
 ## Small directories (size <= 100K):
 
-Small directories (size <= 100K):
+List Small directories (size <= 100K):
 
 | Size | Path |
 |------|------|
@@ -42,6 +46,4 @@ Small directories (size <= 100K):
 | 1989474 | Total size of small directories |
 
 
-
-
-## Thoughts
+# Solution Thoughts / Process
