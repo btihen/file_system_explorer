@@ -80,8 +80,14 @@ Again, I followed the same TDD strategy of sending simple and then progressivly 
 
 Once the 'size' calculator was completed, I then reorganized the class dependencies to the current form.  Since I decided probably the 'consumer' of this data would only be interested in the data structure 'for sanity checks' and curriousity and of course the directory sizes and I would allow the 'consumer / user' process / filter / summarize the data independly - which is written in the 'answer_code.rb' file.
 
-I realized one recurrent aspect of the code where a helper module could have been helpful to avoid lots of repeaded code - with the'overloaded' - path-separator '/' and root-path location '/'. In the end I decided to submit the code as it is in its current form to respect the - submit quickly. But will explore adding as part of the 'kata' aspect for myself.
+I generally choose to use injection for the 'calculator' & 'parse' in most classes since it is simple and encourages an open / closed design.
 
-Thanks for the interesting kata.  Even if you have other candidates you prefer, this kata has been helpful (at my current company I am responsible for collecting and recommending 'katas' so we get better at evolving our designs and discuss what makes good design for our product goals).
+TODO: Will explore adding as part of the 'kata' - for later.
+
+!. One recurrent aspect of the code where a helper module could have been helpful to avoid lots of repeaded code - with the'overloaded' - path-separator '/' and root-path location '/'.
+2. For the summation, I wanted to recursively, re-submit the sum along with the rest of the hash, instead of using an intance variable.
+
+
+Thanks for the interesting kata.
 
 PS - Most steps described here can be followed witht the commits - as I tried to be disciplined about commiting with each 'green' cycle and then add new features or refactor to a better design.
