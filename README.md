@@ -82,3 +82,5 @@ The total sizes of the directories above can be found as follows:
 To begin, find all of the directories with a total size of at most 100000, then calculate the sum of their total sizes. In the example above, these directories are a and e; the sum of their total sizes is 95437 (94853 + 584). (As in this example, this process can count files more than once!)
 
 Find all of the directories with a total size of at most 100000. What is the sum of the total sizes of those directories?
+
+[Kata Souce](https://gist.github.com/ronakjain90/3dcfef6a752f77b3e8202ad9844195ae) - https://gist.github.com/ronakjain90/3dcfef6a752f77b3e8202ad9844195ae
