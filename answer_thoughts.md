@@ -84,4 +84,4 @@ I realized one recurrent aspect of the code where a helper module could have bee
 
 Thanks for the interesting kata.  Even if you have other candidates you prefer, this kata has been helpful (at my current company I am responsible for collecting and recommending 'katas' so we get better at evolving our designs and discuss what makes good design for our product goals).
 
-Have a great day.
+PS - Most steps described here can be followed witht the commits - as I tried to be disciplined about commiting with each 'green' cycle and then add new features or refactor to a better design.
