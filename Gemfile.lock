@@ -14,7 +14,8 @@ GEM
       method_source (~> 1.0)
     rainbow (3.1.1)
     regexp_parser (2.7.0)
-    rexml (3.2.5)
+    rexml (3.3.3)
+      strscan
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -46,10 +47,12 @@ GEM
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
     ruby-progressbar (1.11.0)
+    strscan (3.1.0)
     unicode-display_width (2.4.2)
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   pry (~> 0.14.2)
